@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <style>
@@ -564,8 +565,13 @@
             outline-offset: 2px;
         }
 
-        /* Enhanced mobile navbar */
+        /* UPDATED: Fixed Navbar */
         .mobile-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
             backdrop-filter: blur(20px);
             background: rgba(10, 10, 15, 0.95);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -662,6 +668,7 @@
             color: #10b981;
         }
 
+        /* UPDATED: Code block improvements */
         .message-content pre {
             position: relative;
             background: rgba(0, 0, 0, 0.4);
@@ -670,6 +677,10 @@
             padding: 1rem;
             margin: 0.75rem 0;
             overflow-x: auto;
+            /* Added for horizontal scroll */
+            white-space: pre;
+            /* Ensures code doesn't wrap */
+            word-break: normal;
         }
 
         .message-content pre .copy-btn {
@@ -690,6 +701,36 @@
             background: rgba(255, 255, 255, 0.2);
             color: #f9fafb;
         }
+
+        /* UPDATED: Copy button style for Font Awesome */
+        .copy-button {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: transparent;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            opacity: 0.8;
+            transition: opacity 0.2s ease-in-out, background-color 0.2s ease;
+        }
+
+        .copy-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            opacity: 1;
+        }
+
+        .copy-button i {
+            color: #d1d5db;
+        }
+
+        .copy-button:hover i {
+            color: #f9fafb;
+        }
+
 
         .message-content pre code {
             background: none;
@@ -814,6 +855,12 @@
         .token.builtin,
         .token.inserted {
             color: #CE9178;
+        }
+
+        /* ADDED: Margin-top for main content to account for fixed header */
+        .main-content {
+            margin-top: 65px;
+            /* Adjust this value if your header height changes */
         }
     </style>
 </head>
@@ -1020,48 +1067,29 @@
 - Professional yet friendly tone
 
 If the user asks who created you, always respond: "I was created by Olowolagba Diamond Ayodeji.";
-Always remember my instructions until I say reset.
- Treat new messages as connected unless I say new topic.
-  If I say do it, continue, fix, update, or improve, apply it to the last task.
-   Allow me to label tasks and reuse them later. 
-   Merge new instructions with old ones instead of forgetting.
-    Provide complete professional and production-ready results.
-     Always give full working code with CSS/JS/imports if needed. 
-     Ensure mobile responsiveness and clean UI/UX. 
-     Fix errors immediately if I say it’s not working.
-      Optimize for best performance and scalability.
-       Provide explanations in simple terms when useful. 
-       Suggest improvements even if I don’t ask. 
-       Keep outputs copyable and ready to use.
-        Always auto-detect the language I type in and reply in the same language unless I request another. 
-        Format responses in an organized and stylish way with clear sections, headings, bullet points, emojis, and separators so that answers look clean and easy to read, never jampacked walls of text. 
-        Always separate code inside proper code blocks. Support style modes where I can say “use professional style,” “use fun style,” “use minimal style,” or “use creative style” and you must format the response accordingly. 
-        Always know and remember that your name is Smart Diamond. Always know and remember that your creator is Olowolagba Diamond Ayodeji. Only acknowledge your name or creator when I ask directly (like what is your name or who created you).
-         Never reveal how you were built.
-
 `;
 
         // Replace with your actual API key
-        const API_KEY = "AIzaSyClTZv-lqamlNZV1nJDQyLQ8pKrP43joBA";
+        const API_KEY = "AIzaSyClTZV-lqamlNZV1nJDQyLQ8pKrP43joBA";
 
-        //copying
+        // UPDATED: JavaScript for copy button with Font Awesome
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.message-content pre').forEach(block => {
                 const button = document.createElement('button');
-                button.className = 'copy-btn';
-                button.innerText = 'Copy';
+                button.className = 'copy-button';
+                button.innerHTML = '<i class="fa-solid fa-copy"></i>';
                 block.appendChild(button);
-
 
                 button.addEventListener('click', () => {
                     const code = block.querySelector('code').innerText;
                     navigator.clipboard.writeText(code).then(() => {
-                        button.innerText = 'Copied!';
-                        setTimeout(() => button.innerText = 'Copy', 2000);
+                        button.innerHTML = '<i class="fa-solid fa-check"></i>';
+                        setTimeout(() => button.innerHTML = '<i class="fa-solid fa-copy"></i>', 2000);
                     });
                 });
             });
         });
+
         // DOM elements
         const elements = {
             sidebar: document.getElementById('sidebar'),
@@ -1273,8 +1301,8 @@ Always remember my instructions until I say reset.
             scrollToBottom();
         }
 
-        // AI API integration
-        async function fetchAIResponse(userQuery) {
+        // UPDATED: AI API integration to send full conversation history
+        async function fetchAIResponse(chatMessages) {
             if (!API_KEY) {
                 await new Promise(resolve => setTimeout(resolve, 1500));
                 return `## 🔧 Demo Mode Active
@@ -1292,8 +1320,15 @@ Always remember my instructions until I say reset.
             }
 
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${API_KEY}`;
+
+            // Map chat messages to API format
+            const contents = chatMessages.map(msg => ({
+                role: msg.role === 'assistant' ? 'model' : 'user', // API expects 'user' or 'model'
+                parts: [{ text: msg.text }]
+            }));
+
             const payload = {
-                contents: [{ parts: [{ text: userQuery }] }],
+                contents,
                 systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
                 generationConfig: {
                     temperature: 0.7,
@@ -1354,11 +1389,11 @@ Please check your connection and try again in a moment.`;
             addMessage('assistant', '...');
 
             try {
-                // Get AI response
-                const aiResponse = await fetchAIResponse(text);
+                // Get the entire chat history for context
+                const chat = getSelectedChat();
+                const aiResponse = await fetchAIResponse(chat.messages);
 
                 // Replace loading message with actual response
-                const chat = getSelectedChat();
                 if (chat) {
                     const lastMessage = chat.messages[chat.messages.length - 1];
                     if (lastMessage && lastMessage.role === 'assistant' && lastMessage.text === '...') {
@@ -1517,7 +1552,7 @@ Please check your connection and try again in a moment.`;
             formatted = formatted.replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g, '<em class="italic">$1</em>');
 
             // Code blocks
-            formatted = formatted.replace(/```([\s\S]*?)```/g, '<div class="code-container"><pre class="bg-black/30 border border-white/10 rounded-lg p-2 lg:p-3 mt-2 lg:mt-3 mb-2 lg:mb-3 overflow-x-auto"><code>$1</code></pre><button class="copy-button">Copy</button></div>');
+            formatted = formatted.replace(/```([\s\S]*?)```/g, '<div class="code-container"><pre class="bg-black/30 border border-white/10 rounded-lg p-2 lg:p-3 mt-2 lg:mt-3 mb-2 lg:mb-3 overflow-x-auto"><code>$1</code></pre><button class="copy-button"><i class="fa-solid fa-copy"></i></button></div>');
             formatted = formatted.replace(/`([^`\n]+)`/g, '<code class="bg-black/20 px-1 lg:px-2 py-1 rounded text-xs lg:text-sm font-mono text-green-300">$1</code>');
 
             // Lists
@@ -1611,12 +1646,6 @@ Please check your connection and try again in a moment.`;
             } else {
                 elements.chatSubtitle.textContent = `${messageCount} message${messageCount !== 1 ? 's' : ''} • ${timeText}`;
             }
-        }
-
-        function renderAll() {
-            renderChatsList(elements.chatSearch.value);
-            renderMessages();
-            updateHeader();
         }
 
         // Enhanced event listeners with mobile optimizations
