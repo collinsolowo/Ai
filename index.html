@@ -42,7 +42,6 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Enhanced scrollbar for all devices */
         .custom-scrollbar {
             scrollbar-width: thin;
             scrollbar-color: rgba(139, 92, 246, 0.3) transparent;
@@ -65,7 +64,6 @@
             background: rgba(139, 92, 246, 0.5);
         }
 
-        /* Glass morphism effect */
         .glass {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
@@ -78,7 +76,6 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        /* Message bubbles - Enhanced for mobile */
         .message-user {
             background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
             box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
@@ -91,7 +88,6 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* Animations */
         .fade-in {
             animation: fadeIn 0.3s ease-out forwards;
             opacity: 0;
@@ -121,7 +117,6 @@
             }
         }
 
-        /* Enhanced typing indicator */
         .typing-indicator {
             display: flex;
             align-items: center;
@@ -165,7 +160,6 @@
             }
         }
 
-        /* Ultra-responsive sidebar */
         .sidebar {
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -186,7 +180,6 @@
             visibility: visible;
         }
 
-        /* Button enhancements with better touch targets */
         .btn-primary {
             background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
             transition: all 0.2s ease;
@@ -197,7 +190,7 @@
         .btn-primary:hover:not(:disabled) {
             background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
             transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
         }
 
         .btn-secondary {
@@ -214,7 +207,6 @@
             transform: translateY(-1px);
         }
 
-        /* Enhanced input focus */
         .input-focus {
             transition: all 0.2s ease;
         }
@@ -225,7 +217,6 @@
             outline: none;
         }
 
-        /* Chat item enhancements */
         .chat-item {
             transition: all 0.2s ease;
             border-radius: 12px;
@@ -242,7 +233,6 @@
             border: 1px solid rgba(139, 92, 246, 0.3);
         }
 
-        /* Enhanced composer */
         .composer {
             transition: all 0.2s ease;
         }
@@ -252,7 +242,6 @@
             transform: translateY(-1px);
         }
 
-        /* Loading animation */
         .loading-pulse {
             animation: loadingPulse 2s infinite ease-in-out;
         }
@@ -269,20 +258,16 @@
             }
         }
 
-        /* Smooth scroll */
         .messages-container {
             scroll-behavior: smooth;
         }
 
-        /* Welcome state */
         .welcome-gradient {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(124, 58, 237, 0.05) 100%);
             border: 1px solid rgba(139, 92, 246, 0.2);
         }
 
         /* Ultra-responsive breakpoints */
-
-        /* Extra small phones (320px and up) */
         @media (max-width: 374px) {
             .sidebar {
                 position: fixed;
@@ -303,7 +288,6 @@
                 margin-left: 0;
             }
 
-            /* Ultra-compact header for tiny screens */
             .mobile-header {
                 padding: 8px 12px !important;
                 min-height: 56px;
@@ -330,7 +314,6 @@
 
             .composer textarea {
                 font-size: 16px;
-                /* Prevents zoom on iOS */
             }
 
             .sidebar-header {
@@ -356,7 +339,6 @@
             }
         }
 
-        /* Small phones (375px - 413px) */
         @media (min-width: 375px) and (max-width: 413px) {
             .sidebar {
                 position: fixed;
@@ -387,7 +369,6 @@
             }
         }
 
-        /* Medium phones and small tablets (414px - 767px) */
         @media (min-width: 414px) and (max-width: 767px) {
             .sidebar {
                 position: fixed;
@@ -409,7 +390,6 @@
             }
         }
 
-        /* Tablets (768px - 1023px) */
         @media (min-width: 768px) and (max-width: 1023px) {
             .sidebar {
                 position: fixed;
@@ -431,7 +411,6 @@
             }
         }
 
-        /* Desktop (1024px and up) */
         @media (min-width: 1024px) {
             .sidebar {
                 position: relative;
@@ -449,21 +428,18 @@
             }
         }
 
-        /* Large desktop (1440px and up) */
         @media (min-width: 1440px) {
             .sidebar {
                 width: 380px;
             }
         }
 
-        /* Ultra-wide screens (1920px and up) */
         @media (min-width: 1920px) {
             .sidebar {
                 width: 420px;
             }
         }
 
-        /* Landscape phone orientation fixes */
         @media (max-height: 500px) and (orientation: landscape) {
             .sidebar-header {
                 padding: 12px 16px !important;
@@ -496,7 +472,6 @@
             }
         }
 
-        /* Touch-friendly enhancements */
         @media (hover: none) and (pointer: coarse) {
             .btn-primary:active {
                 transform: scale(0.98);
@@ -514,7 +489,6 @@
             }
         }
 
-        /* Safe area handling for notched devices */
         @supports (padding: max(0px)) {
             .mobile-header {
                 padding-top: max(12px, env(safe-area-inset-top));
@@ -529,7 +503,6 @@
             }
         }
 
-        /* High DPI display optimizations */
         @media (-webkit-min-device-pixel-ratio: 2),
         (min-resolution: 192dpi) {
             .glass {
@@ -541,7 +514,6 @@
             }
         }
 
-        /* Reduced motion preferences */
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation-duration: 0.01ms !important;
@@ -550,7 +522,6 @@
             }
         }
 
-        /* Dark mode enhancements */
         @media (prefers-color-scheme: dark) {
             :root {
                 --bg-primary: #000000;
@@ -559,13 +530,11 @@
             }
         }
 
-        /* Focus management for accessibility */
         .focus-visible {
             outline: 2px solid var(--accent-primary);
             outline-offset: 2px;
         }
 
-        /* UPDATED: Fixed Navbar */
         .mobile-navbar {
             position: fixed;
             top: 0;
@@ -577,7 +546,10 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Responsive text scaling */
+        .main-content {
+            margin-top: 65px;
+        }
+
         @media (max-width: 374px) {
             .text-responsive-sm {
                 font-size: 12px;
@@ -606,7 +578,6 @@
             }
         }
 
-        /* Enhanced message layout for mobile */
         @media (max-width: 767px) {
             .message-container {
                 padding: 12px 16px;
@@ -627,7 +598,6 @@
             }
         }
 
-        /* Enhanced message formatting */
         .message-content h1 {
             font-size: 16px;
             font-weight: 200;
@@ -668,7 +638,6 @@
             color: #10b981;
         }
 
-        /* UPDATED: Code block improvements */
         .message-content pre {
             position: relative;
             background: rgba(0, 0, 0, 0.4);
@@ -677,9 +646,7 @@
             padding: 1rem;
             margin: 0.75rem 0;
             overflow-x: auto;
-            /* Added for horizontal scroll */
             white-space: pre;
-            /* Ensures code doesn't wrap */
             word-break: normal;
         }
 
@@ -702,7 +669,6 @@
             color: #f9fafb;
         }
 
-        /* UPDATED: Copy button style for Font Awesome */
         .copy-button {
             position: absolute;
             top: 8px;
@@ -731,7 +697,6 @@
             color: #f9fafb;
         }
 
-
         .message-content pre code {
             background: none;
             padding: 0;
@@ -748,15 +713,12 @@
             font-style: italic;
         }
 
-        /* Mobile keyboard handling */
         @media (max-width: 767px) {
             .composer textarea {
                 font-size: 16px !important;
-                /* Prevents zoom on iOS */
             }
         }
 
-        /* Enhanced focus states */
         button:focus-visible,
         input:focus-visible,
         textarea:focus-visible {
@@ -764,7 +726,6 @@
             outline-offset: 2px;
         }
 
-        /* Loading states */
         .loading-shimmer {
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
             animation: shimmer 1.5s infinite;
@@ -780,7 +741,6 @@
             }
         }
 
-        /* Enhanced responsive utilities */
         @media (max-width: 640px) {
             .sm-hidden {
                 display: none !important;
@@ -809,8 +769,6 @@
             }
         }
 
-
-        /* VS Code style syntax highlighting */
         .message-content pre code {
             background: none;
             padding: 0;
@@ -819,7 +777,6 @@
             color: #d4d4d4;
         }
 
-
         .token.comment,
         .token.prolog,
         .token.doctype,
@@ -827,11 +784,9 @@
             color: #6A9955;
         }
 
-
         .token.punctuation {
             color: #d4d4d4;
         }
-
 
         .token.property,
         .token.tag,
@@ -841,12 +796,10 @@
             color: #569CD6;
         }
 
-
         .token.boolean,
         .token.number {
             color: #B5CEA8;
         }
-
 
         .token.selector,
         .token.attr-name,
@@ -855,12 +808,6 @@
         .token.builtin,
         .token.inserted {
             color: #CE9178;
-        }
-
-        /* ADDED: Margin-top for main content to account for fixed header */
-        .main-content {
-            margin-top: 65px;
-            /* Adjust this value if your header height changes */
         }
     </style>
 </head>
@@ -1055,7 +1002,6 @@
     </div>
 
     <script>
-        // Configuration
         const STORAGE_KEY = 'smartdiamond_chats_v2';
         const META_KEY = 'smartdiamond_meta_v2';
         const SYSTEM_PROMPT = `You are Smart Diamond, an elegant AI assistant. Always respond with:
@@ -1069,10 +1015,8 @@
 If the user asks who created you, always respond: "I was created by Olowolagba Diamond Ayodeji.";
 `;
 
-        // Replace with your actual API key
-        const API_KEY = "AIzaSyClTZV-lqamlNZV1nJDQyLQ8pKrP43joBA";
+        const API_KEY = "YOUR_API_KEY_HERE";
 
-        // UPDATED: JavaScript for copy button with Font Awesome
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.message-content pre').forEach(block => {
                 const button = document.createElement('button');
@@ -1090,7 +1034,6 @@ If the user asks who created you, always respond: "I was created by Olowolagba D
             });
         });
 
-        // DOM elements
         const elements = {
             sidebar: document.getElementById('sidebar'),
             sidebarOverlay: document.getElementById('sidebar-overlay'),
@@ -1113,12 +1056,10 @@ If the user asks who created you, always respond: "I was created by Olowolagba D
             quickExampleBtn: document.getElementById('quick-example-btn')
         };
 
-        // State
         let chats = [];
         let selectedChatId = null;
         let isLoading = false;
 
-        // Utility functions
         function uid(prefix = 'id') {
             return prefix + '_' + Math.random().toString(36).slice(2, 11);
         }
@@ -1155,7 +1096,6 @@ If the user asks who created you, always respond: "I was created by Olowolagba D
             return text.length > maxLength ? text.slice(0, maxLength) + '...' : text;
         }
 
-        // Enhanced auto-scroll with device detection
         function scrollToBottom(retries = 0) {
             const maxRetries = 3;
             const delays = [0, 100, 300];
@@ -1174,7 +1114,6 @@ If the user asks who created you, always respond: "I was created by Olowolagba D
             }, delays[retries] || 300);
         }
 
-        // Storage functions
         function saveState() {
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(chats));
@@ -1199,7 +1138,6 @@ If the user asks who created you, always respond: "I was created by Olowolagba D
             }
         }
 
-        // Chat management
         function getSelectedChat() {
             return chats.find(chat => chat.id === selectedChatId) || null;
         }
@@ -1273,37 +1211,8 @@ If the user asks who created you, always respond: "I was created by Olowolagba D
             URL.revokeObjectURL(url);
         }
 
-        // Message management
-        function addMessage(role, text) {
-            let chat = getSelectedChat();
-            if (!chat) {
-                createNewChat();
-                chat = getSelectedChat();
-            }
-
-            const message = {
-                id: uid('msg'),
-                role,
-                text,
-                createdAt: nowISO()
-            };
-
-            chat.messages.push(message);
-            chat.updatedAt = nowISO();
-
-            // Auto-generate title from first user message
-            if (chat.messages.length === 1 && role === 'user' && chat.title === 'New Conversation') {
-                chat.title = truncateText(text, 40) || 'Untitled Chat';
-            }
-
-            saveState();
-            renderAll();
-            scrollToBottom();
-        }
-
-        // UPDATED: AI API integration to send full conversation history
         async function fetchAIResponse(chatMessages) {
-            if (!API_KEY) {
+            if (API_KEY === "YOUR_API_KEY_HERE" || !API_KEY) {
                 await new Promise(resolve => setTimeout(resolve, 1500));
                 return `## 🔧 Demo Mode Active
 
@@ -1320,10 +1229,8 @@ If the user asks who created you, always respond: "I was created by Olowolagba D
             }
 
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${API_KEY}`;
-
-            // Map chat messages to API format
             const contents = chatMessages.map(msg => ({
-                role: msg.role === 'assistant' ? 'model' : 'user', // API expects 'user' or 'model'
+                role: msg.role === 'assistant' ? 'model' : 'user',
                 parts: [{ text: msg.text }]
             }));
 
@@ -1366,34 +1273,27 @@ Please check your connection and try again in a moment.`;
             }
         }
 
-        // Enhanced message sending with mobile optimizations
         async function sendMessage() {
             const text = elements.composerInput.value.trim();
             if (!text || isLoading) return;
 
-            // Clear input and reset height
             elements.composerInput.value = '';
             elements.composerInput.style.height = 'auto';
 
-            // Blur input on mobile to hide keyboard
             if (window.innerWidth <= 767) {
                 elements.composerInput.blur();
                 setTimeout(() => elements.composerInput.focus(), 100);
             }
 
-            // Add user message
             addMessage('user', text);
 
-            // Show loading state
             setLoading(true);
             addMessage('assistant', '...');
 
             try {
-                // Get the entire chat history for context
                 const chat = getSelectedChat();
                 const aiResponse = await fetchAIResponse(chat.messages);
 
-                // Replace loading message with actual response
                 if (chat) {
                     const lastMessage = chat.messages[chat.messages.length - 1];
                     if (lastMessage && lastMessage.role === 'assistant' && lastMessage.text === '...') {
@@ -1433,7 +1333,32 @@ Please check your connection and try again in a moment.`;
             }
         }
 
-        // Enhanced sidebar functions with mobile optimizations
+        function addMessage(role, text) {
+            let chat = getSelectedChat();
+            if (!chat) {
+                createNewChat();
+                chat = getSelectedChat();
+            }
+
+            const message = {
+                id: uid('msg'),
+                role,
+                text,
+                createdAt: nowISO()
+            };
+
+            chat.messages.push(message);
+            chat.updatedAt = nowISO();
+
+            if (chat.messages.length === 1 && role === 'user' && chat.title === 'New Conversation') {
+                chat.title = truncateText(text, 40) || 'Untitled Chat';
+            }
+
+            saveState();
+            renderAll();
+            scrollToBottom();
+        }
+
         function openSidebar() {
             if (window.innerWidth <= 1023) {
                 elements.sidebar.classList.remove('hidden');
@@ -1441,7 +1366,6 @@ Please check your connection and try again in a moment.`;
                 elements.sidebarOverlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
 
-                // Focus trap for accessibility
                 const firstFocusable = elements.sidebar.querySelector('button, input');
                 if (firstFocusable) {
                     setTimeout(() => firstFocusable.focus(), 100);
@@ -1461,12 +1385,10 @@ Please check your connection and try again in a moment.`;
                     }
                 }, 300);
 
-                // Return focus to main content
                 elements.composerInput?.focus();
             }
         }
 
-        // Enhanced auto-resize with mobile optimizations
         function autoResizeTextarea() {
             elements.composerInput.style.height = 'auto';
             const maxHeight = window.innerWidth <= 767 ? 80 : 120;
@@ -1474,7 +1396,6 @@ Please check your connection and try again in a moment.`;
             elements.composerInput.style.height = newHeight + 'px';
         }
 
-        // Enhanced render functions
         function renderChatsList(filter = '') {
             const filteredChats = chats.filter(chat =>
                 chat.title.toLowerCase().includes(filter.toLowerCase())
@@ -1518,7 +1439,6 @@ Please check your connection and try again in a moment.`;
                 `;
             }).join('');
 
-            // Add click listeners with enhanced touch handling
             elements.chatsList.querySelectorAll('.chat-item').forEach(item => {
                 item.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -1526,7 +1446,6 @@ Please check your connection and try again in a moment.`;
                     selectChat(chatId);
                 });
 
-                // Enhanced touch feedback
                 item.addEventListener('touchstart', () => {
                     item.style.transform = 'scale(0.98)';
                 });
@@ -1542,24 +1461,19 @@ Please check your connection and try again in a moment.`;
 
             let formatted = escapeHtml(text);
 
-            // Enhanced markdown parsing for better formatting
             formatted = formatted.replace(/^### (.*$)/gm, '<h3 class="text-base lg:text-lg font-semibold text-white mt-3 lg:mt-4 mb-2 first:mt-0">$1</h3>');
             formatted = formatted.replace(/^## (.*$)/gm, '<h2 class="text-lg lg:text-xl font-bold text-white mt-4 lg:mt-5 mb-2 lg:mb-3 first:mt-0">$1</h2>');
             formatted = formatted.replace(/^# (.*$)/gm, '<h1 class="text-xl lg:text-2xl font-bold text-white mt-5 lg:mt-6 mb-3 lg:mb-4 first:mt-0">$1</h1>');
 
-            // Bold and italic
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-white">$1</strong>');
             formatted = formatted.replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g, '<em class="italic">$1</em>');
 
-            // Code blocks
             formatted = formatted.replace(/```([\s\S]*?)```/g, '<div class="code-container"><pre class="bg-black/30 border border-white/10 rounded-lg p-2 lg:p-3 mt-2 lg:mt-3 mb-2 lg:mb-3 overflow-x-auto"><code>$1</code></pre><button class="copy-button"><i class="fa-solid fa-copy"></i></button></div>');
             formatted = formatted.replace(/`([^`\n]+)`/g, '<code class="bg-black/20 px-1 lg:px-2 py-1 rounded text-xs lg:text-sm font-mono text-green-300">$1</code>');
 
-            // Lists
             formatted = formatted.replace(/^- (.*$)/gm, '<li class="ml-3 lg:ml-4 mb-1 list-disc">$1</li>');
             formatted = formatted.replace(/^(\d+)\. (.*$)/gm, '<li class="ml-3 lg:ml-4 mb-1 list-decimal">$1. $2</li>');
 
-            // Wrap consecutive list items
             formatted = formatted.replace(/(<li.*?<\/li>\s*)+/g, '<ul class="my-2 lg:my-3 space-y-1 pl-4">$&</ul>');
 
             return formatted;
@@ -1635,7 +1549,6 @@ Please check your connection and try again in a moment.`;
 
             elements.chatTitle.textContent = chat.title || 'Untitled Chat';
 
-            // Responsive subtitle
             const messageCount = chat.messages.length;
             const timeText = formatTime(chat.updatedAt);
 
@@ -1648,7 +1561,12 @@ Please check your connection and try again in a moment.`;
             }
         }
 
-        // Enhanced event listeners with mobile optimizations
+        function renderAll() {
+            renderChatsList();
+            renderMessages();
+            updateHeader();
+        }
+
         elements.sidebarToggle?.addEventListener('click', (e) => {
             e.preventDefault();
             openSidebar();
@@ -1713,7 +1631,6 @@ Please check your connection and try again in a moment.`;
             await sendMessage();
         });
 
-        // Enhanced keyboard shortcuts
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeSidebar();
@@ -1725,7 +1642,6 @@ Please check your connection and try again in a moment.`;
             }
         });
 
-        // Enhanced window resize handler
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
@@ -1736,13 +1652,11 @@ Please check your connection and try again in a moment.`;
                     document.body.style.overflow = 'auto';
                 }
 
-                // Re-render to adjust responsive elements
                 updateHeader();
                 autoResizeTextarea();
             }, 100);
         });
 
-        // Enhanced orientation change handler
         window.addEventListener('orientationchange', () => {
             setTimeout(() => {
                 updateHeader();
@@ -1751,7 +1665,6 @@ Please check your connection and try again in a moment.`;
             }, 300);
         });
 
-        // Touch gesture enhancements
         let touchStartX = 0;
         let touchStartY = 0;
 
@@ -1768,17 +1681,14 @@ Please check your connection and try again in a moment.`;
             const deltaX = touchX - touchStartX;
             const deltaY = Math.abs(touchY - touchStartY);
 
-            // Swipe left to close sidebar (only if vertical movement is minimal)
             if (deltaX < -50 && deltaY < 100 && window.innerWidth <= 1023) {
                 closeSidebar();
             }
         });
 
-        // Initialize app with mobile optimizations
         function initializeApp() {
             loadState();
 
-            // Create welcome chat if no chats exist
             if (chats.length === 0) {
                 createNewChat('Welcome to Smart Diamond');
                 addMessage('assistant', `# 👋 Welcome to Smart Diamond!
@@ -1792,32 +1702,29 @@ I'm your intelligent AI assistant, designed to provide **elegant, structured res
 - **Maintain context** throughout our conversation
 
 ## 🚀 Getting Started:
-Simply type your question below and press Enter. I'll respond with well-organized, visually appealing answers that are easy to read and understand.\n
+Simply type your question below and press Enter. I'll respond with well-organized, visually appealing answers that are easy to read and understand.
+
 *Ready to explore? Ask me anything!*`);
                 saveState();
             }
 
-            // Set initial selected chat
             if (!selectedChatId && chats.length > 0) {
                 selectedChatId = chats[0].id;
             }
 
             renderAll();
 
-            // Enhanced focus management
             setTimeout(() => {
                 if (window.innerWidth > 767) {
                     elements.composerInput?.focus();
                 }
             }, 500);
 
-            // Prevent zoom on iOS
             if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
                 document.addEventListener('touchstart', () => { }, { passive: true });
             }
         }
 
-        // Start the application
         initializeApp();
     </script>
 </body>
