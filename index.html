@@ -1015,7 +1015,7 @@
 If the user asks who created you, always respond: "I was created by Olowolagba Diamond Ayodeji.";
 `;
 
-        const API_KEY = "YOUR_API_KEY_HERE";
+        const API_KEY = "AIzaSyBc5sRt_p6rS1Z5F5Gtr-Ln29m-jbwTiMg";
 
         document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.message-content pre').forEach(block => {
@@ -1212,7 +1212,7 @@ If the user asks who created you, always respond: "I was created by Olowolagba D
         }
 
         async function fetchAIResponse(chatMessages) {
-            if (API_KEY === "AIzaSyDsJj2FWFTPUHIsjFsm7BihscLdo9-O_LY" || !API_KEY) {
+            if (API_KEY === "YOUR_API_KEY_HERE" || !API_KEY) {
                 await new Promise(resolve => setTimeout(resolve, 1500));
                 return `## 🔧 Demo Mode Active
 
@@ -1252,14 +1252,20 @@ If the user asks who created you, always respond: "I was created by Olowolagba D
                     body: JSON.stringify(payload)
                 });
 
+                // Check if the response is not OK (status code is not in the range 200-299)
                 if (!response.ok) {
-                    throw new Error(`API Error: ${response.status}`);
+                    throw new Error(`API Error: ${response.status} - ${response.statusText}`);
                 }
 
                 const data = await response.json();
-                const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
-                return text || "I apologize, but I couldn't generate a proper response. Please try asking your question again.";
+                // If the response doesn't contain expected content
+                const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (!text) {
+                    throw new Error('No response text from the API.');
+                }
+
+                return text;
             } catch (error) {
                 console.error('AI API Error:', error);
                 return `## ⚠️ Connection Error
@@ -1267,7 +1273,8 @@ If the user asks who created you, always respond: "I was created by Olowolagba D
 I'm having trouble connecting to the AI service right now. This could be due to:
 
 - **Network connectivity issues**
-- **API rate limits** - **Invalid API key**
+- **API rate limits** or **Invalid API key**
+- **Server-side errors**
 
 Please check your connection and try again in a moment.`;
             }
