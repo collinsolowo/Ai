@@ -7,6 +7,17 @@
     <title>Smart Diamond — AI Chat</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <!-- Prism.js VS Code Dark+ theme -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-vsc-dark-plus.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
@@ -267,25 +278,76 @@
             border: 1px solid rgba(139, 92, 246, 0.2);
         }
 
-        /* Ultra-responsive breakpoints */
-        @media (max-width: 374px) {
+        /* Ultra-responsive design for all screen sizes */
+        @media (max-width: 320px) {
             .sidebar {
-                position: fixed;
-                top: 0;
-                left: 0;
-                bottom: 0;
                 width: 100vw;
                 max-width: 100vw;
-                z-index: 50;
-                transform: translateX(-100%);
             }
 
-            .sidebar.open {
-                transform: translateX(0);
+            .mobile-header {
+                padding: 6px 8px !important;
+                min-height: 50px;
             }
 
-            .main-content {
-                margin-left: 0;
+            .mobile-header .chat-info h2 {
+                font-size: 12px !important;
+            }
+
+            .mobile-header .header-actions {
+                gap: 2px;
+            }
+
+            .mobile-header .header-actions button {
+                width: 32px;
+                height: 32px;
+                padding: 4px;
+            }
+
+            .composer {
+                padding: 8px !important;
+                margin: 6px !important;
+            }
+
+            .composer textarea {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .sidebar-header {
+                padding: 12px 8px !important;
+            }
+
+            .sidebar-header h1 {
+                font-size: 14px !important;
+            }
+
+            .sidebar-header p {
+                font-size: 10px !important;
+            }
+
+            .chat-item {
+                padding: 8px !important;
+                min-height: 50px;
+            }
+
+            .message-bubble {
+                max-width: 98% !important;
+                font-size: 13px;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                min-height: 36px;
+                min-width: 36px;
+                padding: 6px 8px;
+            }
+        }
+
+        @media (min-width: 321px) and (max-width: 374px) {
+            .sidebar {
+                width: 100vw;
+                max-width: 100vw;
             }
 
             .mobile-header {
@@ -294,7 +356,12 @@
             }
 
             .mobile-header .chat-info {
-                display: none;
+                min-width: 0;
+                flex: 1;
+            }
+
+            .mobile-header .chat-info h2 {
+                font-size: 13px !important;
             }
 
             .mobile-header .header-actions {
@@ -341,22 +408,8 @@
 
         @media (min-width: 375px) and (max-width: 413px) {
             .sidebar {
-                position: fixed;
-                top: 0;
-                left: 0;
-                bottom: 0;
                 width: 90vw;
                 max-width: 320px;
-                z-index: 50;
-                transform: translateX(-100%);
-            }
-
-            .sidebar.open {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
             }
 
             .mobile-header {
@@ -371,6 +424,28 @@
 
         @media (min-width: 414px) and (max-width: 767px) {
             .sidebar {
+                width: 85vw;
+                max-width: 350px;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .sidebar {
+                width: 380px;
+                max-width: 45vw;
+            }
+
+            .main-content {
+                margin-top: 0 !important;
+            }
+
+            .mobile-navbar {
+                position: relative !important;
+            }
+        }
+
+        @media (max-width: 1023px) {
+            .sidebar {
                 position: fixed;
                 top: 0;
                 left: 0;
@@ -379,35 +454,36 @@
                 max-width: 350px;
                 z-index: 50;
                 transform: translateX(-100%);
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
             }
 
             .sidebar.open {
                 transform: translateX(0);
             }
 
+            .sidebar #chats-list {
+                flex: 1;
+                overflow-y: auto;
+                min-height: 0;
+                max-height: none;
+            }
+
             .main-content {
                 margin-left: 0;
+                margin-top: 65px;
             }
-        }
 
-        @media (min-width: 768px) and (max-width: 1023px) {
-            .sidebar {
+            .mobile-navbar {
                 position: fixed;
                 top: 0;
                 left: 0;
-                bottom: 0;
-                width: 380px;
-                max-width: 45vw;
-                z-index: 50;
-                transform: translateX(-100%);
-            }
-
-            .sidebar.open {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
+                right: 0;
+                z-index: 45;
+                backdrop-filter: blur(20px);
+                background: rgba(10, 10, 15, 0.95);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             }
         }
 
@@ -417,14 +493,23 @@
                 transform: translateX(0);
                 width: 320px;
                 display: flex !important;
+                height: 100vh;
             }
 
             .main-content {
                 margin-left: 0;
+                margin-top: 0 !important;
             }
 
             .mobile-only {
                 display: none !important;
+            }
+
+            .mobile-navbar {
+                position: relative !important;
+                backdrop-filter: none !important;
+                background: transparent !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
             }
         }
 
@@ -440,22 +525,23 @@
             }
         }
 
+        /* Landscape orientation optimizations */
         @media (max-height: 500px) and (orientation: landscape) {
             .sidebar-header {
-                padding: 12px 16px !important;
+                padding: 8px 12px !important;
             }
 
             .sidebar-header .logo-section {
-                gap: 8px !important;
+                gap: 6px !important;
             }
 
             .sidebar-header .logo {
-                width: 36px !important;
-                height: 36px !important;
+                width: 32px !important;
+                height: 32px !important;
             }
 
             .sidebar-header h1 {
-                font-size: 16px !important;
+                font-size: 14px !important;
             }
 
             .sidebar-header p {
@@ -463,15 +549,22 @@
             }
 
             .mobile-header {
-                min-height: 48px !important;
-                padding: 8px 16px !important;
+                min-height: 44px !important;
+                padding: 6px 12px !important;
             }
 
             .composer {
-                padding: 12px !important;
+                padding: 8px !important;
+                margin: 8px !important;
+            }
+
+            .chat-item {
+                min-height: 48px !important;
+                padding: 8px 12px !important;
             }
         }
 
+        /* Touch device optimizations */
         @media (hover: none) and (pointer: coarse) {
             .btn-primary:active {
                 transform: scale(0.98);
@@ -489,6 +582,7 @@
             }
         }
 
+        /* Safe area support for notched devices */
         @supports (padding: max(0px)) {
             .mobile-header {
                 padding-top: max(12px, env(safe-area-inset-top));
@@ -503,6 +597,7 @@
             }
         }
 
+        /* High DPI display optimizations */
         @media (-webkit-min-device-pixel-ratio: 2),
         (min-resolution: 192dpi) {
             .glass {
@@ -514,6 +609,7 @@
             }
         }
 
+        /* Accessibility - reduced motion */
         @media (prefers-reduced-motion: reduce) {
             * {
                 animation-duration: 0.01ms !important;
@@ -522,6 +618,7 @@
             }
         }
 
+        /* Dark mode enhancements */
         @media (prefers-color-scheme: dark) {
             :root {
                 --bg-primary: #000000;
@@ -535,50 +632,28 @@
             outline-offset: 2px;
         }
 
-        .mobile-navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 50;
-            backdrop-filter: blur(20px);
-            background: rgba(10, 10, 15, 0.95);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .main-content {
-            margin-top: 65px;
-        }
-
-        @media (max-width: 374px) {
-            .text-responsive-sm {
-                font-size: 12px;
+        /* Message responsive styles */
+        @media (max-width: 480px) {
+            .message-container {
+                padding: 8px 12px;
             }
 
-            .text-responsive-base {
-                font-size: 14px;
+            .message-bubble {
+                max-width: 95%;
+                padding: 10px 14px;
+                border-radius: 16px;
             }
 
-            .text-responsive-lg {
-                font-size: 16px;
+            .message-user .message-bubble {
+                border-bottom-right-radius: 4px;
+            }
+
+            .message-assistant .message-bubble {
+                border-bottom-left-radius: 4px;
             }
         }
 
-        @media (min-width: 375px) {
-            .text-responsive-sm {
-                font-size: 13px;
-            }
-
-            .text-responsive-base {
-                font-size: 15px;
-            }
-
-            .text-responsive-lg {
-                font-size: 18px;
-            }
-        }
-
-        @media (max-width: 767px) {
+        @media (min-width: 481px) and (max-width: 767px) {
             .message-container {
                 padding: 12px 16px;
             }
@@ -598,22 +673,35 @@
             }
         }
 
+        @media (min-width: 768px) {
+            .message-container {
+                padding: 16px 24px;
+            }
+
+            .message-bubble {
+                max-width: 85%;
+                padding: 16px 20px;
+                border-radius: 20px;
+            }
+        }
+
+        /* Typography responsive scaling */
         .message-content h1 {
-            font-size: 16px;
-            font-weight: 200;
+            font-size: clamp(18px, 4vw, 24px);
+            font-weight: 700;
             color: white;
             margin: 1rem 0 0.75rem 0;
         }
 
         .message-content h2 {
-            font-size: 1.125rem;
+            font-size: clamp(16px, 3.5vw, 20px);
             font-weight: 600;
             color: white;
             margin: 0.875rem 0 0.5rem 0;
         }
 
         .message-content h3 {
-            font-size: 1rem;
+            font-size: clamp(14px, 3vw, 18px);
             font-weight: 600;
             color: white;
             margin: 0.75rem 0 0.5rem 0;
@@ -622,86 +710,199 @@
         .message-content ul,
         .message-content ol {
             margin: 0.75rem 0;
-            padding-left: 1.5rem;
+            padding-left: clamp(1rem, 4vw, 1.5rem);
         }
 
         .message-content li {
             margin: 0.25rem 0;
         }
 
-        .message-content code {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            font-family: 'Courier New', monospace;
-            font-size: 0.875rem;
-            color: #10b981;
-        }
-
+        /* Code block responsive styling */
         .message-content pre {
-            position: relative;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 0.5rem;
-            padding: 1rem;
-            margin: 0.75rem 0;
+            background: #1e1e1e !important;
+            color: #d4d4d4 !important;
+            border: 1px solid #2d2d30;
+            border-radius: 6px;
+            padding: clamp(12px, 3vw, 16px);
+            margin: 12px 0;
             overflow-x: auto;
-            white-space: pre;
-            word-break: normal;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: "Consolas", "Courier New", "Menlo", monospace;
+            font-size: clamp(12px, 2.5vw, 14px);
+            line-height: 1.5;
+            position: relative;
+            max-width: 100%;
         }
 
-        .message-content pre .copy-btn {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            color: #d1d5db;
-            border: none;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-            font-size: 0.75rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
+        .message-content pre code {
+            background: transparent !important;
+            padding: 0 !important;
+            color: #d4d4d4 !important;
+            font-family: "Consolas", "Courier New", "Menlo", monospace;
+            font-size: inherit;
+            line-height: 1.5;
+            border-radius: 0;
         }
 
-        .message-content pre .copy-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
-            color: #f9fafb;
+        /* Inline code - VS Code style */
+        .message-content code:not(pre code) {
+            background: #2d2d30 !important;
+            color: #ce9178 !important;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: "Consolas", "Courier New", "Menlo", monospace;
+            font-size: clamp(11px, 2.2vw, 13px);
+            font-weight: normal;
+        }
+
+        /* VS Code Dark+ Syntax Highlighting - Exact Colors */
+        .token.comment,
+        .token.prolog,
+        .token.doctype,
+        .token.cdata {
+            color: #6a9955 !important;
+            font-style: italic;
+        }
+
+        .token.punctuation {
+            color: #d4d4d4 !important;
+        }
+
+        .token.property,
+        .token.tag,
+        .token.constant,
+        .token.symbol,
+        .token.deleted {
+            color: #569cd6 !important;
+        }
+
+        .token.boolean,
+        .token.number {
+            color: #b5cea8 !important;
+        }
+
+        .token.selector,
+        .token.attr-name,
+        .token.string,
+        .token.char,
+        .token.builtin,
+        .token.inserted {
+            color: #ce9178 !important;
+        }
+
+        .token.operator,
+        .token.entity,
+        .token.url {
+            color: #d4d4d4 !important;
+        }
+
+        .token.keyword {
+            color: #569cd6 !important;
+            font-weight: normal;
+        }
+
+        .token.function {
+            color: #dcdcaa !important;
+        }
+
+        .token.variable {
+            color: #9cdcfe !important;
+        }
+
+        .token.class-name {
+            color: #4ec9b0 !important;
+        }
+
+        .token.regex,
+        .token.important {
+            color: #d16969 !important;
+        }
+
+        .token.atrule {
+            color: #c586c0 !important;
+        }
+
+        .token.attr-value {
+            color: #ce9178 !important;
+        }
+
+        .token.namespace {
+            opacity: 0.7;
+        }
+
+        /* JavaScript specific */
+        .language-javascript .token.keyword,
+        .language-js .token.keyword {
+            color: #569cd6 !important;
+        }
+
+        .language-javascript .token.function,
+        .language-js .token.function {
+            color: #dcdcaa !important;
+        }
+
+        /* TypeScript specific */
+        .language-typescript .token.keyword,
+        .language-ts .token.keyword {
+            color: #569cd6 !important;
+        }
+
+        .language-typescript .token.builtin,
+        .language-ts .token.builtin {
+            color: #4ec9b0 !important;
+        }
+
+        /* CSS specific */
+        .language-css .token.selector {
+            color: #d7ba7d !important;
+        }
+
+        .language-css .token.property {
+            color: #9cdcfe !important;
+        }
+
+        /* HTML specific */
+        .language-html .token.tag .token.tag {
+            color: #569cd6 !important;
+        }
+
+        .language-html .token.tag .token.punctuation {
+            color: #808080 !important;
+        }
+
+        .language-html .token.attr-name {
+            color: #9cdcfe !important;
         }
 
         .copy-button {
             position: absolute;
             top: 8px;
             right: 8px;
-            background-color: transparent;
-            color: white;
-            border: none;
-            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #d4d4d4;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 8px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 14px;
-            opacity: 0.8;
-            transition: opacity 0.2s ease-in-out, background-color 0.2s ease;
+            font-size: 12px;
+            opacity: 0.7;
+            transition: all 0.2s ease;
+            font-family: inherit;
         }
 
         .copy-button:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.2);
             opacity: 1;
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .copy-button i {
-            color: #d1d5db;
+            color: #d4d4d4;
         }
 
         .copy-button:hover i {
-            color: #f9fafb;
-        }
-
-        .message-content pre code {
-            background: none;
-            padding: 0;
-            color: #10b981;
-            font-size: 0.8rem;
+            color: #ffffff;
         }
 
         .message-content strong {
@@ -713,6 +914,7 @@
             font-style: italic;
         }
 
+        /* Force 16px font size on mobile to prevent zoom */
         @media (max-width: 767px) {
             .composer textarea {
                 font-size: 16px !important;
@@ -741,6 +943,7 @@
             }
         }
 
+        /* Utility classes for responsive hiding/showing */
         @media (max-width: 640px) {
             .sm-hidden {
                 display: none !important;
@@ -769,45 +972,168 @@
             }
         }
 
-        .message-content pre code {
-            background: none;
-            padding: 0;
-            font-size: 0.85rem;
-            font-family: 'Courier New', monospace;
-            color: #d4d4d4;
+        /* Enhanced responsive code blocks */
+        @media (max-width: 480px) {
+            .message-content pre {
+                padding-right: 2.5rem;
+                font-size: 11px;
+                line-height: 1.4;
+            }
+
+            .copy-button {
+                font-size: 10px;
+                padding: 4px 6px;
+                top: 6px;
+                right: 6px;
+            }
         }
 
-        .token.comment,
-        .token.prolog,
-        .token.doctype,
-        .token.cdata {
-            color: #6A9955;
+        /* Image container responsive styling */
+        .image-container {
+            max-width: 100%;
+            margin: 12px 0;
         }
 
-        .token.punctuation {
-            color: #d4d4d4;
+        .image-container img {
+            width: 100%;
+            height: auto;
+            max-height: min(400px, 50vh);
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .token.property,
-        .token.tag,
-        .token.constant,
-        .token.symbol,
-        .token.deleted {
-            color: #569CD6;
+        @media (max-width: 480px) {
+            .image-container img {
+                max-height: min(300px, 40vh);
+                border-radius: 6px;
+            }
         }
 
-        .token.boolean,
-        .token.number {
-            color: #B5CEA8;
+        /* Loading states for image generation */
+        .image-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px dashed rgba(139, 92, 246, 0.3);
+            border-radius: 8px;
+            margin: 12px 0;
         }
 
-        .token.selector,
-        .token.attr-name,
-        .token.string,
-        .token.char,
-        .token.builtin,
-        .token.inserted {
-            color: #CE9178;
+        .image-loading-spinner {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(139, 92, 246, 0.3);
+            border-top: 2px solid var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Enhanced button spacing and sizing */
+        .composer .flex {
+            align-items: flex-end;
+            gap: clamp(8px, 2vw, 16px);
+        }
+
+        .composer button {
+            min-width: clamp(40px, 8vw, 48px);
+            min-height: clamp(40px, 8vw, 48px);
+            border-radius: clamp(8px, 2vw, 12px);
+        }
+
+        /* Ultra-small screen optimizations */
+        @media (max-width: 280px) {
+            .sidebar {
+                width: 100vw !important;
+                max-width: 100vw !important;
+            }
+
+            .mobile-header {
+                padding: 4px 6px !important;
+                min-height: 44px !important;
+            }
+
+            .mobile-header .header-actions button {
+                width: 28px !important;
+                height: 28px !important;
+                padding: 2px !important;
+            }
+
+            .mobile-header .header-actions svg {
+                width: 14px !important;
+                height: 14px !important;
+            }
+
+            .composer {
+                padding: 6px !important;
+                margin: 4px !important;
+            }
+
+            .composer button {
+                min-width: 32px !important;
+                min-height: 32px !important;
+                padding: 4px !important;
+            }
+
+            .composer svg {
+                width: 16px !important;
+                height: 16px !important;
+            }
+
+            .sidebar-header .logo {
+                width: 28px !important;
+                height: 28px !important;
+            }
+
+            .sidebar-header h1 {
+                font-size: 12px !important;
+            }
+
+            .message-bubble {
+                font-size: 12px !important;
+                padding: 8px 10px !important;
+            }
+        }
+
+        /* Improved sidebar scrolling behavior */
+        .sidebar #chats-list {
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain;
+        }
+
+        /* Better message spacing on different screen sizes */
+        @media (max-width: 374px) {
+            #messages {
+                padding: 12px 8px !important;
+                gap: 8px !important;
+            }
+        }
+
+        @media (min-width: 375px) and (max-width: 767px) {
+            #messages {
+                padding: 16px 12px !important;
+                gap: 12px !important;
+            }
+        }
+
+        @media (min-width: 768px) {
+            #messages {
+                padding: 24px !important;
+                gap: 16px !important;
+            }
         }
     </style>
 </head>
@@ -817,11 +1143,11 @@
 
     <div class="h-screen flex">
         <aside id="sidebar" class="sidebar hidden lg:flex flex-col glass-strong">
-            <div class="sidebar-header p-4 lg:p-6 border-b border-white/10">
+            <div class="sidebar-header p-4 lg:p-6 border-b border-white/10 shrink-0">
                 <div class="flex items-center justify-between mb-4 lg:mb-6">
-                    <div class="logo-section flex items-center gap-2 lg:gap-3">
+                    <div class="logo-section flex items-center gap-2 lg:gap-3 min-w-0 flex-1">
                         <div
-                            class="logo w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg">
+                            class="logo w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shadow-lg shrink-0">
                             <svg class="w-5 h-5 lg:w-6 lg:h-6 text-white" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -834,7 +1160,7 @@
                         </div>
                     </div>
 
-                    <button id="sidebar-close" class="mobile-only lg:hidden p-2 rounded-lg btn-secondary">
+                    <button id="sidebar-close" class="mobile-only lg:hidden p-2 rounded-lg btn-secondary shrink-0">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M6 18L18 6M6 6l12 12" />
@@ -843,7 +1169,7 @@
                 </div>
 
                 <button id="new-chat-btn"
-                    class="w-full btn-primary text-white py-3 px-4 rounded-xl font-medium text-responsive-base">
+                    class="w-full btn-primary text-white py-3 px-4 rounded-xl font-medium text-sm lg:text-base">
                     <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                     </svg>
@@ -851,7 +1177,7 @@
                 </button>
             </div>
 
-            <div class="p-3 lg:p-4">
+            <div class="p-3 lg:p-4 shrink-0">
                 <div class="relative">
                     <input id="chat-search" type="text" placeholder="Search conversations..."
                         class="w-full bg-white/5 border border-white/10 rounded-lg px-3 lg:px-4 py-2 lg:py-3 pl-10 text-sm input-focus placeholder-gray-400 text-white" />
@@ -863,9 +1189,9 @@
                 </div>
             </div>
 
-            <div id="chats-list" class="flex-1 overflow-y-auto custom-scrollbar px-3 lg:px-4 pb-4"></div>
+            <div id="chats-list" class="flex-1 overflow-y-auto custom-scrollbar px-3 lg:px-4 pb-4 min-h-0"></div>
 
-            <div class="p-3 lg:p-4 border-t border-white/10">
+            <div class="p-3 lg:p-4 border-t border-white/10 shrink-0">
                 <div class="flex items-center gap-2 lg:gap-3">
                     <div
                         class="w-8 h-8 lg:w-10 lg:h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-xs lg:text-sm shrink-0">
@@ -884,7 +1210,7 @@
             <header class="mobile-navbar mobile-header glass border-b border-white/10 px-3 lg:px-6 py-3 lg:py-4">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-2 lg:gap-4 flex-1 min-w-0">
-                        <button id="sidebar-toggle" class="mobile-only lg:hidden p-2 rounded-lg btn-secondary">
+                        <button id="sidebar-toggle" class="mobile-only lg:hidden p-2 rounded-lg btn-secondary shrink-0">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4 6h16M4 12h16M4 18h16" />
@@ -903,7 +1229,7 @@
                             <div class="min-w-0 flex-1">
                                 <h2 id="chat-title" class="text-sm lg:text-lg font-semibold text-white truncate">New
                                     Conversation</h2>
-                                <p id="chat-subtitle" class="text-xs lg:text-sm text-gray-400 truncate hidden sm:block">
+                                <p id="chat-subtitle" class="text-xs lg:text-sm text-gray-400 truncate">
                                     Start chatting with Smart Diamond</p>
                             </div>
                         </div>
@@ -938,7 +1264,7 @@
             <div class="flex-1 flex flex-col overflow-hidden">
                 <div id="messages-container" class="flex-1 overflow-y-auto custom-scrollbar messages-container">
                     <div id="empty-state" class="h-full flex items-center justify-center p-4 lg:p-8">
-                        <div class="text-center max-w-sm lg:max-w-md mx-auto">
+                        <div class="text-center max-w-xs sm:max-w-sm lg:max-w-md mx-auto px-4">
                             <div
                                 class="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center mx-auto mb-4 lg:mb-6 shadow-2xl">
                                 <svg class="w-8 h-8 lg:w-10 lg:h-10 text-white" fill="none" stroke="currentColor"
@@ -947,9 +1273,10 @@
                                         d="M13 10V3L4 14h7v7l9-11h-7z" />
                                 </svg>
                             </div>
-                            <h3 class="text-xl lg:text-2xl font-bold text-white mb-2 lg:mb-3">Welcome to Smart Diamond
+                            <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-2 lg:mb-3">Welcome to
+                                Smart Diamond
                             </h3>
-                            <p class="text-sm lg:text-base text-gray-400 mb-6 lg:mb-8 leading-relaxed px-2">Your
+                            <p class="text-xs sm:text-sm lg:text-base text-gray-400 mb-6 lg:mb-8 leading-relaxed">Your
                                 intelligent AI assistant is ready to help. Ask questions, get insights, or explore ideas
                                 with beautifully formatted responses.</p>
                             <button id="quick-example-btn"
@@ -966,14 +1293,21 @@
                     <div id="messages" class="space-y-4 lg:space-y-6 p-3 lg:p-6 min-h-full"></div>
                 </div>
 
-                <div class="border-t border-white/10 p-3 lg:p-6">
+                <div class="border-t border-white/10 p-3 lg:p-6 shrink-0">
                     <div class="composer glass-strong rounded-xl lg:rounded-2xl p-3 lg:p-4">
                         <div class="flex items-end gap-2 lg:gap-4">
-                            <div class="flex-1">
+                            <div class="flex-1 min-w-0">
                                 <textarea id="composer-input" rows="1" placeholder="Ask Smart Diamond anything..."
-                                    class=" w-full bg-transparent resize-none outline-none text-white placeholder-gray-400 leading-relaxed text-sm lg:text-base "
+                                    class="w-full bg-transparent resize-none outline-none text-white placeholder-gray-400 leading-relaxed text-sm lg:text-base"
                                     style="max-height: 100px; min-height: 20px;"></textarea>
                             </div>
+                            <button id="image-gen-btn" title="Generate Image"
+                                class="btn-secondary text-white p-2 lg:p-3 rounded-lg lg:rounded-xl shrink-0">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 2h12a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2z" />
+                                </svg>
+                            </button>
                             <button id="send-btn"
                                 class="btn-primary text-white p-2 lg:p-3 rounded-lg lg:rounded-xl shrink-0">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1004,34 +1338,87 @@
     <script>
         const STORAGE_KEY = 'smartdiamond_chats_v2';
         const META_KEY = 'smartdiamond_meta_v2';
-        const SYSTEM_PROMPT = `You are Smart Diamond, an elegant AI assistant. Always respond with:
-- Clear structure using headings (##, ###)
-- Bullet points and numbered lists
-- Relevant emojis for visual appeal
-- Code blocks when appropriate
-- Concise but comprehensive answers
-- Professional yet friendly tone
+        const SYSTEM_PROMPT = `
+You are **Smart Diamond**, a highly intelligent, elegant, and professional AI assistant created by Olowolagba Diamond Ayodeji.  
+Your purpose is to provide helpful, accurate, and beautifully structured responses to any question the user asks.
 
-If the user asks who created you, always respond: "I was created by Olowolagba Diamond Ayodeji.";
+### Image Generation Capability:
+- You can generate images when users request them
+- When a user asks for image generation, respond with: "I'll generate that image for you!" followed by a detailed description
+- The system will automatically detect image generation requests and create the image
+- You have access to advanced AI image generation through Hugging Face models
+
+### Core Behavior:
+- Always maintain a **professional yet friendly tone**.
+- Answer with **clarity, structure, and depth**, avoiding vague replies.
+- Use **proper Markdown formatting** for headers, lists, code blocks, and emphasis.
+- Provide **actionable insights** and **practical examples** when relevant.
+- Be **concise but comprehensive** - cover the topic thoroughly without unnecessary verbosity.
+
+### Response Structure:
+- Use **headers** (# ## ###) to organize information hierarchically
+- Apply **bold** for key concepts and important points
+- Use *italics* for emphasis and technical terms
+- Create **bullet points** and **numbered lists** for clarity
+- Include \`inline code\` for commands, variables, and technical terms
+- Use **code blocks** with proper language syntax highlighting
+- Add **tables** for comparing data or options
+- Include **emojis** strategically for visual appeal (🚀 ⚡ 💡 🎯 ✨ 🔧 📊 🎨)
+
+### Expertise Areas:
+- **Technology & Programming** - All languages, frameworks, best practices
+- **Business & Strategy** - Analysis, planning, optimization
+- **Science & Research** - Data analysis, methodology, insights
+- **Creative Projects** - Writing, design, content creation
+- **Problem Solving** - Debugging, troubleshooting, solutions
+- **Education** - Explanations, tutorials, learning paths
+
+### Key Guidelines:
+1. **Always be helpful** - Go above and beyond to assist users
+2. **Stay accurate** - Provide correct, up-to-date information
+3. **Be structured** - Organize responses logically and clearly
+4. **Think critically** - Analyze problems from multiple angles
+5. **Encourage learning** - Explain concepts and provide context
+6. **Admit limitations** - Be honest when uncertain about something
+
+### Special Instructions:
+- If asked **"Who created you?"** → Always reply: **"I was created by Olowolagba Diamond Ayodeji."**
+- For code examples, always use proper syntax highlighting and include comments
+- When discussing complex topics, break them down into digestible sections
+- Provide follow-up questions or suggestions to continue the conversation
+- Use professional language while remaining approachable and engaging
+
+**Your mission**: Be the most helpful, knowledgeable, and well-structured AI assistant possible. Every response should add genuine value and demonstrate expertise while maintaining clarity and professionalism.
 `;
 
         const API_KEY = "AIzaSyBc5sRt_p6rS1Z5F5Gtr-Ln29m-jbwTiMg";
+        const HF_API_KEY = "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";
 
         document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('.message-content pre').forEach(block => {
-                const button = document.createElement('button');
-                button.className = 'copy-button';
-                button.innerHTML = '<i class="fa-solid fa-copy"></i>';
-                block.appendChild(button);
+            // Add copy buttons to existing code blocks
+            setTimeout(() => {
+                document.querySelectorAll('.message-content pre').forEach(block => {
+                    if (!block.querySelector('.copy-button')) {
+                        const button = document.createElement('button');
+                        button.className = 'copy-button';
+                        button.innerHTML = '<i class="fa-solid fa-copy"></i>';
+                        block.appendChild(button);
 
-                button.addEventListener('click', () => {
-                    const code = block.querySelector('code').innerText;
-                    navigator.clipboard.writeText(code).then(() => {
-                        button.innerHTML = '<i class="fa-solid fa-check"></i>';
-                        setTimeout(() => button.innerHTML = '<i class="fa-solid fa-copy"></i>', 2000);
-                    });
+                        button.addEventListener('click', () => {
+                            const code = block.querySelector('code').innerText;
+                            navigator.clipboard.writeText(code).then(() => {
+                                button.innerHTML = '<i class="fa-solid fa-check"></i>';
+                                setTimeout(() => button.innerHTML = '<i class="fa-solid fa-copy"></i>', 2000);
+                            });
+                        });
+                    }
                 });
-            });
+
+                // Apply syntax highlighting
+                if (window.Prism) {
+                    Prism.highlightAll();
+                }
+            }, 100);
         });
 
         const elements = {
@@ -1053,7 +1440,8 @@ If the user asks who created you, always respond: "I was created by Olowolagba D
             renameBtn: document.getElementById('rename-chat-btn'),
             deleteBtn: document.getElementById('delete-chat-btn'),
             exportBtn: document.getElementById('export-chat-btn'),
-            quickExampleBtn: document.getElementById('quick-example-btn')
+            quickExampleBtn: document.getElementById('quick-example-btn'),
+            imageGenBtn: document.getElementById('image-gen-btn')
         };
 
         let chats = [];
@@ -1212,7 +1600,7 @@ If the user asks who created you, always respond: "I was created by Olowolagba D
         }
 
         async function fetchAIResponse(chatMessages) {
-            if (API_KEY === "YOUR_API_KEY_HERE" || !API_KEY) {
+            if (API_KEY === "AIzaSyClTZv-lqamlNZV1nJDQyLQ8pKrP43joBA" || !API_KEY) {
                 await new Promise(resolve => setTimeout(resolve, 1500));
                 return `## 🔧 Demo Mode Active
 
@@ -1224,6 +1612,7 @@ If the user asks who created you, always respond: "I was created by Olowolagba D
 - 📱 **Mobile Responsive** - Works perfectly on all devices
 - 💾 **Auto-save** - Your chats are saved automatically
 - 📤 **Export** - Download conversations as JSON
+- 🎨 **Image Generation** - AI-powered image creation
 
 *Ready to connect your API key and start chatting!*`;
             }
@@ -1238,10 +1627,10 @@ If the user asks who created you, always respond: "I was created by Olowolagba D
                 contents,
                 systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
                 generationConfig: {
-                    temperature: 0.7,
+                    temperature: 0.8,
                     topK: 40,
                     topP: 0.95,
-                    maxOutputTokens: 2048
+                    maxOutputTokens: 4096
                 }
             };
 
@@ -1252,14 +1641,11 @@ If the user asks who created you, always respond: "I was created by Olowolagba D
                     body: JSON.stringify(payload)
                 });
 
-                // Check if the response is not OK (status code is not in the range 200-299)
                 if (!response.ok) {
                     throw new Error(`API Error: ${response.status} - ${response.statusText}`);
                 }
 
                 const data = await response.json();
-
-                // If the response doesn't contain expected content
                 const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
                 if (!text) {
                     throw new Error('No response text from the API.');
@@ -1280,48 +1666,10 @@ Please check your connection and try again in a moment.`;
             }
         }
 
-        async function sendMessage() {
-            const text = elements.composerInput.value.trim();
-            if (!text || isLoading) return;
-
-            elements.composerInput.value = '';
-            elements.composerInput.style.height = 'auto';
-
-            if (window.innerWidth <= 767) {
-                elements.composerInput.blur();
-                setTimeout(() => elements.composerInput.focus(), 100);
-            }
-
-            addMessage('user', text);
-
-            setLoading(true);
-            addMessage('assistant', '...');
-
-            try {
-                const chat = getSelectedChat();
-                const aiResponse = await fetchAIResponse(chat.messages);
-
-                if (chat) {
-                    const lastMessage = chat.messages[chat.messages.length - 1];
-                    if (lastMessage && lastMessage.role === 'assistant' && lastMessage.text === '...') {
-                        lastMessage.text = aiResponse;
-                        lastMessage.createdAt = nowISO();
-                        chat.updatedAt = nowISO();
-                        saveState();
-                        renderMessages();
-                        scrollToBottom();
-                    }
-                }
-            } catch (error) {
-                console.error('Error sending message:', error);
-            } finally {
-                setLoading(false);
-            }
-        }
-
         function setLoading(loading) {
             isLoading = loading;
             elements.sendBtn.disabled = loading;
+            elements.imageGenBtn.disabled = loading;
             elements.composerInput.disabled = loading;
             elements.typingStatus.classList.toggle('hidden', !loading);
 
@@ -1463,27 +1811,133 @@ Please check your connection and try again in a moment.`;
             });
         }
 
+        function detectLanguage(code) {
+            const trimmed = code.trim();
+
+            if (trimmed.includes('import ') && trimmed.includes('=>')) return 'javascript';
+            if (trimmed.includes('def ') || trimmed.includes('print(')) return 'python';
+            if (trimmed.includes('interface ') || trimmed.includes(': string')) return 'typescript';
+            if (trimmed.includes('<div') || trimmed.includes('<html')) return 'html';
+            if (trimmed.includes('{') && trimmed.includes('color:')) return 'css';
+            if (trimmed.includes('SELECT ') || trimmed.includes('INSERT ')) return 'sql';
+            if (trimmed.includes('#include') || trimmed.includes('int main')) return 'c';
+            if (trimmed.includes('public class') || trimmed.includes('System.out')) return 'java';
+
+            return 'javascript'; // default
+        }
+
         function formatMessageContent(text) {
             if (!text) return '';
 
             let formatted = escapeHtml(text);
 
+            // Headers
             formatted = formatted.replace(/^### (.*$)/gm, '<h3 class="text-base lg:text-lg font-semibold text-white mt-3 lg:mt-4 mb-2 first:mt-0">$1</h3>');
             formatted = formatted.replace(/^## (.*$)/gm, '<h2 class="text-lg lg:text-xl font-bold text-white mt-4 lg:mt-5 mb-2 lg:mb-3 first:mt-0">$1</h2>');
             formatted = formatted.replace(/^# (.*$)/gm, '<h1 class="text-xl lg:text-2xl font-bold text-white mt-5 lg:mt-6 mb-3 lg:mb-4 first:mt-0">$1</h1>');
 
+            // Bold and italic
             formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-white">$1</strong>');
             formatted = formatted.replace(/(?<!\*)\*([^*\n]+)\*(?!\*)/g, '<em class="italic">$1</em>');
 
-            formatted = formatted.replace(/```([\s\S]*?)```/g, '<div class="code-container"><pre class="bg-black/30 border border-white/10 rounded-lg p-2 lg:p-3 mt-2 lg:mt-3 mb-2 lg:mb-3 overflow-x-auto"><code>$1</code></pre><button class="copy-button"><i class="fa-solid fa-copy"></i></button></div>');
-            formatted = formatted.replace(/`([^`\n]+)`/g, '<code class="bg-black/20 px-1 lg:px-2 py-1 rounded text-xs lg:text-sm font-mono text-green-300">$1</code>');
+            // Code blocks with proper language detection and VS Code styling
+            formatted = formatted.replace(/```(\w+)?\n?([\s\S]*?)```/g, (match, lang, code) => {
+                const detectedLang = lang || detectLanguage(code);
+                const trimmedCode = code.trim();
+                return `<div class="code-container relative"><pre class="language-${detectedLang}"><code class="language-${detectedLang}">${escapeHtml(trimmedCode)}</code></pre><button class="copy-button" data-code="${escapeHtml(trimmedCode)}"><i class="fa-solid fa-copy"></i></button></div>`;
+            });
 
+            // Inline code
+            formatted = formatted.replace(/`([^`\n]+)`/g, '<code>$1</code>');
+
+            // Lists
             formatted = formatted.replace(/^- (.*$)/gm, '<li class="ml-3 lg:ml-4 mb-1 list-disc">$1</li>');
-            formatted = formatted.replace(/^(\d+)\. (.*$)/gm, '<li class="ml-3 lg:ml-4 mb-1 list-decimal">$1. $2</li>');
-
+            formatted = formatted.replace(/^(\d+)\. (.*$)/gm, '<li class="ml-3 lg:ml-4 mb-1 list-decimal">$2</li>');
             formatted = formatted.replace(/(<li.*?<\/li>\s*)+/g, '<ul class="my-2 lg:my-3 space-y-1 pl-4">$&</ul>');
 
             return formatted;
+        }
+
+        async function generateImage(prompt) {
+            try {
+                const response = await fetch(
+                    "https://api-inference.huggingface.co/models/black-forest-labs/FLUX.1-dev",
+                    {
+                        headers: {
+                            Authorization: `Bearer ${HF_API_KEY}`,
+                            "Content-Type": "application/json",
+                        },
+                        method: "POST",
+                        body: JSON.stringify({
+                            inputs: prompt,
+                            parameters: {
+                                guidance_scale: 7.5,
+                                num_inference_steps: 50,
+                                width: 1024,
+                                height: 1024
+                            }
+                        }),
+                    }
+                );
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('API Response:', errorText);
+                    throw new Error(`HTTP error! status: ${response.status} - ${errorText}`);
+                }
+
+                const blob = await response.blob();
+
+                // Check if blob is valid
+                if (blob.size === 0) {
+                    throw new Error('Received empty response from image generation API');
+                }
+
+                return URL.createObjectURL(blob);
+            } catch (error) {
+                console.error('Image generation error:', error);
+                throw error;
+            }
+        }
+
+        function isImageGenerationRequest(text) {
+            const imageKeywords = [
+                'generate image', 'create image', 'make image', 'draw', 'generate picture',
+                'create picture', 'make picture', 'generate photo', 'create photo',
+                'image of', 'picture of', 'photo of', 'generate art', 'create art',
+                'make art', 'artwork', 'illustration', 'sketch', 'painting',
+                'visualize', 'show me a picture', 'design an image'
+            ];
+
+            const lowerText = text.toLowerCase();
+            return imageKeywords.some(keyword => lowerText.includes(keyword));
+        }
+
+        function createImageLoadingPlaceholder() {
+            return `
+                <div class="image-loading">
+                    <div class="flex items-center gap-3">
+                        <div class="image-loading-spinner"></div>
+                        <div class="text-sm text-gray-300">
+                            <div class="font-medium">Generating image...</div>
+                            <div class="text-xs text-gray-400 mt-1">This may take a few moments</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function createImageDisplay(imageUrl, prompt) {
+            return `
+                <div class="image-container">
+                    <img src="${imageUrl}" alt="Generated image: ${prompt}" 
+                         class="max-w-full h-auto rounded-lg shadow-lg border border-white/10" 
+                         style="max-height: min(400px, 50vh); object-fit: contain;" 
+                         onload="this.style.opacity='1'" 
+                         style="opacity: 0; transition: opacity 0.3s ease;">
+                    <p class="text-xs text-gray-400 mt-2 italic">Generated: "${truncateText(prompt, 60)}"</p>
+                </div>
+            `;
         }
 
         function renderMessages() {
@@ -1517,7 +1971,7 @@ Please check your connection and try again in a moment.`;
 
                 return `
                     <div class="message-container flex ${isUser ? 'justify-end' : 'justify-start'} fade-in px-3 lg:px-0" style="animation-delay: ${index * 0.1}s">
-                        <div class="message-bubble max-w-[90%] sm:max-w-[85%] lg:max-w-[75%]">
+                        <div class="message-bubble max-w-[95%] sm:max-w-[90%] md:max-w-[85%] lg:max-w-[75%]">
                             ${!isUser ? `
                                 <div class="flex items-center gap-2 mb-2">
                                     <div class="w-5 h-5 lg:w-6 lg:h-6 rounded-full bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center shrink-0">
@@ -1542,6 +1996,32 @@ Please check your connection and try again in a moment.`;
                 `;
             }).join('');
 
+            // Apply syntax highlighting and add copy functionality
+            setTimeout(() => {
+                if (window.Prism) {
+                    Prism.highlightAll();
+                }
+
+                document.querySelectorAll('.copy-button').forEach(button => {
+                    button.addEventListener('click', function () {
+                        const code = this.getAttribute('data-code') ||
+                            this.parentElement.querySelector('code').innerText;
+
+                        navigator.clipboard.writeText(code).then(() => {
+                            this.innerHTML = '<i class="fa-solid fa-check"></i>';
+                            setTimeout(() => {
+                                this.innerHTML = '<i class="fa-solid fa-copy"></i>';
+                            }, 2000);
+                        }).catch(() => {
+                            this.innerHTML = '<i class="fa-solid fa-times"></i>';
+                            setTimeout(() => {
+                                this.innerHTML = '<i class="fa-solid fa-copy"></i>';
+                            }, 2000);
+                        });
+                    });
+                });
+            }, 100);
+
             scrollToBottom();
         }
 
@@ -1559,10 +2039,12 @@ Please check your connection and try again in a moment.`;
             const messageCount = chat.messages.length;
             const timeText = formatTime(chat.updatedAt);
 
-            if (window.innerWidth <= 374) {
+            if (window.innerWidth <= 320) {
                 elements.chatSubtitle.textContent = `${messageCount} msg`;
-            } else if (window.innerWidth <= 767) {
+            } else if (window.innerWidth <= 480) {
                 elements.chatSubtitle.textContent = `${messageCount} messages`;
+            } else if (window.innerWidth <= 767) {
+                elements.chatSubtitle.textContent = `${messageCount} messages • ${timeText}`;
             } else {
                 elements.chatSubtitle.textContent = `${messageCount} message${messageCount !== 1 ? 's' : ''} • ${timeText}`;
             }
@@ -1574,6 +2056,7 @@ Please check your connection and try again in a moment.`;
             updateHeader();
         }
 
+        // Event listeners
         elements.sidebarToggle?.addEventListener('click', (e) => {
             e.preventDefault();
             openSidebar();
@@ -1612,6 +2095,14 @@ Please check your connection and try again in a moment.`;
             }
         });
 
+        elements.imageGenBtn?.addEventListener('click', (e) => {
+            e.preventDefault();
+            const currentText = elements.composerInput.value;
+            elements.composerInput.value = currentText ? `Generate image: ${currentText}` : 'Generate image: ';
+            elements.composerInput.focus();
+            autoResizeTextarea();
+        });
+
         elements.renameBtn?.addEventListener('click', (e) => {
             e.preventDefault();
             const chat = getSelectedChat();
@@ -1632,12 +2123,123 @@ Please check your connection and try again in a moment.`;
 
         elements.quickExampleBtn?.addEventListener('click', async (e) => {
             e.preventDefault();
-            if (!selectedChatId) createNewChat('UX Design Tips');
-            elements.composerInput.value = "Give me 5 modern web design principles that will make my website stand out in 2025";
+            if (!selectedChatId) createNewChat('Advanced Development Tips');
+            elements.composerInput.value = "Show me how to create a modern React component with TypeScript, including proper error handling and accessibility features";
             autoResizeTextarea();
             await sendMessage();
         });
 
+        async function sendMessage() {
+            const text = elements.composerInput.value.trim();
+            if (!text || isLoading) return;
+
+            elements.composerInput.value = '';
+            elements.composerInput.style.height = 'auto';
+
+            if (window.innerWidth <= 767) {
+                elements.composerInput.blur();
+                setTimeout(() => elements.composerInput.focus(), 100);
+            }
+
+            addMessage('user', text);
+
+            // Check if this is an image generation request
+            if (isImageGenerationRequest(text)) {
+                setLoading(true);
+
+                // Add a message with loading state
+                addMessage('assistant', '🎨 I\'ll generate that image for you!\n\n' + createImageLoadingPlaceholder());
+
+                try {
+                    // Extract prompt for image generation
+                    const cleanPrompt = text.replace(/^(generate|create|make|draw)\s+(image|picture|photo|art)(\s+of)?:?\s*/i, '').trim();
+                    const finalPrompt = cleanPrompt || text;
+
+                    console.log('Generating image with prompt:', finalPrompt);
+                    const imageUrl = await generateImage(finalPrompt);
+
+                    const chat = getSelectedChat();
+                    if (chat) {
+                        const lastMessage = chat.messages[chat.messages.length - 1];
+                        if (lastMessage && lastMessage.role === 'assistant') {
+                            lastMessage.text = `🎨 I've generated an image for you!\n\n${createImageDisplay(imageUrl, finalPrompt)}`;
+                            lastMessage.createdAt = nowISO();
+                            chat.updatedAt = nowISO();
+                            saveState();
+                            renderMessages();
+                            scrollToBottom();
+                        }
+                    }
+                } catch (error) {
+                    console.error('Image generation failed:', error);
+                    const chat = getSelectedChat();
+                    if (chat) {
+                        const lastMessage = chat.messages[chat.messages.length - 1];
+                        if (lastMessage && lastMessage.role === 'assistant') {
+                            lastMessage.text = `## ⚠️ Image Generation Error
+
+I encountered an issue while generating your image. This could be due to:
+
+- **API rate limits** or **server overload**
+- **Content policy restrictions**  
+- **Network connectivity issues**
+- **Model temporarily unavailable**
+
+Please try again with a different prompt or wait a moment before retrying. You can also try simplifying your prompt for better results.
+
+**Tip**: Try prompts like "a beautiful sunset over mountains" or "a futuristic city skyline"`;
+                            lastMessage.createdAt = nowISO();
+                            chat.updatedAt = nowISO();
+                            saveState();
+                            renderMessages();
+                            scrollToBottom();
+                        }
+                    }
+                } finally {
+                    setLoading(false);
+                }
+                return;
+            }
+
+            // Regular text message handling
+            setLoading(true);
+            addMessage('assistant', '...');
+
+            try {
+                const chat = getSelectedChat();
+                const aiResponse = await fetchAIResponse(chat.messages);
+
+                if (chat) {
+                    const lastMessage = chat.messages[chat.messages.length - 1];
+                    if (lastMessage && lastMessage.role === 'assistant' && lastMessage.text === '...') {
+                        lastMessage.text = aiResponse;
+                        lastMessage.createdAt = nowISO();
+                        chat.updatedAt = nowISO();
+                        saveState();
+                        renderMessages();
+                        scrollToBottom();
+                    }
+                }
+            } catch (error) {
+                console.error('Error sending message:', error);
+                const chat = getSelectedChat();
+                if (chat) {
+                    const lastMessage = chat.messages[chat.messages.length - 1];
+                    if (lastMessage && lastMessage.role === 'assistant' && lastMessage.text === '...') {
+                        lastMessage.text = '## ⚠️ Error\n\nSorry, I encountered an error processing your request. Please try again.';
+                        lastMessage.createdAt = nowISO();
+                        chat.updatedAt = nowISO();
+                        saveState();
+                        renderMessages();
+                        scrollToBottom();
+                    }
+                }
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        // Keyboard shortcuts
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeSidebar();
@@ -1649,6 +2251,7 @@ Please check your connection and try again in a moment.`;
             }
         });
 
+        // Responsive design handlers
         let resizeTimeout;
         window.addEventListener('resize', () => {
             clearTimeout(resizeTimeout);
@@ -1672,13 +2275,14 @@ Please check your connection and try again in a moment.`;
             }, 300);
         });
 
+        // Touch gesture support for mobile
         let touchStartX = 0;
         let touchStartY = 0;
 
         document.addEventListener('touchstart', (e) => {
             touchStartX = e.touches[0].clientX;
             touchStartY = e.touches[0].clientY;
-        });
+        }, { passive: true });
 
         document.addEventListener('touchmove', (e) => {
             if (!elements.sidebar.classList.contains('open')) return;
@@ -1691,7 +2295,7 @@ Please check your connection and try again in a moment.`;
             if (deltaX < -50 && deltaY < 100 && window.innerWidth <= 1023) {
                 closeSidebar();
             }
-        });
+        }, { passive: true });
 
         function initializeApp() {
             loadState();
@@ -1700,18 +2304,34 @@ Please check your connection and try again in a moment.`;
                 createNewChat('Welcome to Smart Diamond');
                 addMessage('assistant', `# 👋 Welcome to Smart Diamond!
 
-I'm your intelligent AI assistant, designed to provide **elegant, structured responses** with beautiful formatting.
+I'm your exceptionally intelligent AI assistant, engineered to provide **comprehensive, expert-level responses** across any domain you can imagine.
 
-## ✨ What I can help with:
-- **Answer questions** with detailed explanations
-- **Provide insights** on various topics  
-- **Format responses** with headings, lists, and code
-- **Maintain context** throughout our conversation
+## 🎯 What Makes Me Special:
+- **Universal Expertise** - Deep knowledge in technology, science, business, arts, and beyond
+- **Advanced Problem Solving** - Handle complex multi-step challenges with strategic thinking
+- **Code Mastery** - Expert in all programming languages with production-ready solutions
+- **Creative Intelligence** - Excel at writing, design, ideation, and artistic guidance
+- **Research Capability** - Analyze complex topics and provide evidence-based insights
+- **🎨 Image Generation** - Create stunning AI-generated images from your descriptions
 
-## 🚀 Getting Started:
-Simply type your question below and press Enter. I'll respond with well-organized, visually appealing answers that are easy to read and understand.
+## ⚡ My Capabilities Include:
+- **Software Development** - Full-stack development, system architecture, code review
+- **Data Analysis** - Statistics, visualization, machine learning insights
+- **Business Strategy** - Market analysis, planning, optimization recommendations
+- **Creative Projects** - Writing, design concepts, content creation, AI art
+- **Learning & Education** - Tutoring, curriculum design, concept explanations
+- **Problem Solving** - Debug issues, optimize processes, strategic solutions
 
-*Ready to explore? Ask me anything!*`);
+## 🚀 Enhanced Features:
+- **VS Code-Perfect Syntax** - Code blocks with exact VS Code Dark+ theme colors
+- **Ultra-Responsive Design** - Seamless experience on any device size (320px to 4K)
+- **Intelligent Responses** - Context-aware answers that anticipate your needs
+- **AI Image Creation** - Click the image button or say "generate image" to create artwork
+
+## 💡 Ready to Explore:
+Ask me **anything** - from complex coding challenges to creative projects, from business strategy to scientific concepts. I can also create beautiful images based on your descriptions!
+
+*What would you like to discover or create today?*`);
                 saveState();
             }
 
@@ -1727,6 +2347,7 @@ Simply type your question below and press Enter. I'll respond with well-organize
                 }
             }, 500);
 
+            // iOS optimization
             if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
                 document.addEventListener('touchstart', () => { }, { passive: true });
             }
